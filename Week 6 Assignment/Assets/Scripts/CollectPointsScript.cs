@@ -9,16 +9,18 @@ public class CollectPointsScript : MonoBehaviour {
 
 	public int damageValue = 1; //number of damage to incur
 
-	public static CollectPointsScript instance;//static instance of this class which can be accessed by other scripts
+	//public static CollectPointsScript instance;//static instance of this class which can be accessed by other scripts
 
 	void Start(){
-		if(instance == null){//checks if instance already exists
-			instance = this;//if no instance already exists, make this the instance
-			DontDestroyOnLoad(this);//sets this to not be destroyed when a scene is loaded
-		}
-		else{//if an instance already exists
-			Destroy(this.gameObject);//destroys this
-		}
+//		if(instance == null){//checks if instance already exists
+//			instance = this;//if no instance already exists, make this the instance
+//			DontDestroyOnLoad(this);//sets this to not be destroyed when a scene is loaded
+//		}
+//		else{//if an instance already exists
+//			Destroy(this.gameObject);//destroys this
+//		}
+		gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+		gameManager.player = gameObject;
 	}
 
 

@@ -90,9 +90,16 @@ public class LevelLoaderScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void AdvanceLevel () {
 		if(Input.GetKeyDown(KeyCode.Return)){
 			levelNum++;
+			SceneManager.LoadScene("LevelBuilder");
+		}
+	}
+
+	public void ReloadLevel () {
+		if(Input.GetKeyDown(KeyCode.Return)){
+			
 			SceneManager.LoadScene("LevelBuilder");
 		}
 	}

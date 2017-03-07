@@ -13,6 +13,8 @@ public class GameManagerScript : MonoBehaviour {
 	 
 	public GameObject player; //reference to player
 
+	public LevelLoaderScript levelLoader;
+
 	private int scoreToAdvance = 100; //score needed to advance to next level
 
 	private const string PREF_HIGH_SCORE = "highScorePref"; //constant high score
@@ -90,6 +92,8 @@ public class GameManagerScript : MonoBehaviour {
 			Destroy(this.gameObject); //destroys this
 		}
 
+		levelLoader = GetComponent<LevelLoaderScript>();
+
 		Score = 0; //sets starting score
 		Health = HEALTH_MAX;//sets starting health
 
@@ -101,13 +105,18 @@ public class GameManagerScript : MonoBehaviour {
 	void Update () {
 		if(Score == scoreToAdvance){ //if the score has reached the necessary value to advance levels
 			scoreToAdvance += 100; //increase the necessary score for next time
-			player.transform.position = new Vector3 (0,0,0); //zero out player position
-			SceneManager.LoadScene("Scene 2"); //load next scene
+			//player.transform.position = new Vector3 (0,0,0); //zero out player position
+			//SceneManager.LoadScene("Scene 2"); //load next scene
+		
+			levelLoader.AdvanceLevel();
 		}
 		if(Health == HEALTH_MIN){ //if health reaches minimum
 			Health = HEALTH_MAX;//set health back to maximum
-			player.transform.position = new Vector3 (0,0,0);//sero out player position
-			SceneManager.LoadScene("Scene 1");//load first scene
+			//player.transform.position = new Vector3 (0,0,0);//sero out player position
+			//SceneManager.LoadScene("Scene 1");//load first scene
+		
+			levelLoader.ReloadLevel();
+			print ("reload");
 		}
 	}
 }
