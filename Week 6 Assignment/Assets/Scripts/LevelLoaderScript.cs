@@ -16,6 +16,12 @@ public class LevelLoaderScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		BuildLevel();
+	}
+
+	void BuildLevel (){
+		print("level loader online");
+
 		string fileName = fileNames[levelNum];
 
 		string filePath = Application.dataPath + "/" + fileName;
@@ -51,7 +57,7 @@ public class LevelLoaderScript : MonoBehaviour {
 					obstacleVertical.transform.position = new Vector3(xPos + offsetX, yPos + offsetY, 0);
 				}
 
-				if(line[xPos] == '+'){
+				if(line[xPos] == 'f'){
 					
 					GameObject obstacleCross = Instantiate(Resources.Load("Prefabs/Obstacle3") as GameObject);
 
@@ -91,16 +97,14 @@ public class LevelLoaderScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void AdvanceLevel () {
-		if(Input.GetKeyDown(KeyCode.Return)){
-			levelNum++;
-			SceneManager.LoadScene("LevelBuilder");
-		}
+		levelNum++;
+		print("Loading level: " + levelNum);
+		SceneManager.LoadScene("LevelBuilder");
+		BuildLevel();
 	}
 
 	public void ReloadLevel () {
-		if(Input.GetKeyDown(KeyCode.Return)){
-			
-			SceneManager.LoadScene("LevelBuilder");
-		}
+		SceneManager.LoadScene("LevelBuilder");
+		BuildLevel();
 	}
 }

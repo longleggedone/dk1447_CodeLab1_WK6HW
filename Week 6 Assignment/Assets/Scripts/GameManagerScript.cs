@@ -92,7 +92,7 @@ public class GameManagerScript : MonoBehaviour {
 			Destroy(this.gameObject); //destroys this
 		}
 
-		levelLoader = GetComponent<LevelLoaderScript>();
+		levelLoader = GameObject.FindGameObjectWithTag("LevelBuilder").GetComponent<LevelLoaderScript>();
 
 		Score = 0; //sets starting score
 		Health = HEALTH_MAX;//sets starting health
@@ -105,14 +105,14 @@ public class GameManagerScript : MonoBehaviour {
 	void Update () {
 		if(Score == scoreToAdvance){ //if the score has reached the necessary value to advance levels
 			scoreToAdvance += 100; //increase the necessary score for next time
-			//player.transform.position = new Vector3 (0,0,0); //zero out player position
+			player.transform.position = new Vector3 (-15,-7,0); //zero out player position
 			//SceneManager.LoadScene("Scene 2"); //load next scene
 		
 			levelLoader.AdvanceLevel();
 		}
 		if(Health == HEALTH_MIN){ //if health reaches minimum
 			Health = HEALTH_MAX;//set health back to maximum
-			//player.transform.position = new Vector3 (0,0,0);//sero out player position
+			player.transform.position = new Vector3 (-15,-7,0);//sero out player position
 			//SceneManager.LoadScene("Scene 1");//load first scene
 		
 			levelLoader.ReloadLevel();
